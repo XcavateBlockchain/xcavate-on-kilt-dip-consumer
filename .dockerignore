@@ -1,0 +1,14 @@
+.git
+.github
+.gitignore
+.gitlab-ci.yml
+.rustfmt.toml
+**/.maintain*
+**/target*
+**/*.rs.bk
+*.iml
+.vscode
+.editorconfig
+docker-compose.yml
+*Dockerfile
+.dockerignore
