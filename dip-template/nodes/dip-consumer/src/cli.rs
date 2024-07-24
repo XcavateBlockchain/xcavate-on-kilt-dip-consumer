@@ -28,6 +28,9 @@ use crate::chain_spec::Extensions;
 #[allow(clippy::large_enum_variant)]
 #[derive(Debug, clap::Subcommand)]
 pub enum Subcommand {
+	#[command(subcommand)]
+    Key(sc_cli::KeySubcommand),
+	
 	BuildSpec(BuildSpecCmd),
 
 	CheckBlock(CheckBlockCmd),

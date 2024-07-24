@@ -1,0 +1,79 @@
+// general
+./target/release/dip-consumer-node-template \
+-lbasic-authorship=trace \
+--bob \
+--collator \
+--force-authoring \
+--chain raw-parachain-chainspec.json \
+--base-path ./tmp/node02 \
+--port 40334 \
+--rpc-port 8845 \
+-- \
+--execution wasm \
+--chain paseo.json \
+--port 30344 \
+--rpc-port 9978 \
+--rpc-methods unsafe \
+--unsafe-rpc-external \
+--blocks-pruning=256
+
+// for ganesh
+../binaries/dip-consumer-node-template \
+-lbasic-authorship=trace \
+--bob \
+--collator \
+--force-authoring \
+--chain raw-parachain-chainspec.json \
+--base-path ./tmp/node02 \
+--port 40334 \
+--rpc-port 8845 \
+-- \
+--execution wasm \
+--chain paseo.json \
+--port 30344 \
+--rpc-port 9978 \
+--rpc-methods unsafe \
+--unsafe-rpc-external \
+--blocks-pruning=256
+
+
+// general
+./target/release/dip-consumer-node-template \ 
+-lbasic-authorship=trace \
+--alice \
+--collator \
+--force-authoring \
+--chain raw-parachain-chainspec.json \
+--base-path ./tmp/node01 \
+--port 40333 \
+--rpc-port 8844 \
+--bootnodes /ip4/127.0.0.1/tcp/40334/p2p/12D3KooWEaX75kVqd6PyYTgqzga5NFvvDuRVC8JnkDwHoAHhavLn \
+-- \
+--execution wasm \
+--chain paseo.json \
+--port 30343 \
+--rpc-port 9977 \
+--rpc-methods unsafe \
+--unsafe-rpc-external \
+--blocks-pruning=256
+
+
+// for ganesh
+../binaries/dip-consumer-node-template \
+-lbasic-authorship=trace \
+--alice \
+--collator \
+--force-authoring \
+--chain raw-parachain-chainspec.json \
+--base-path ./tmp/node01 \
+--port 40333 \
+--rpc-port 8844 \
+--bootnodes /ip4/127.0.0.1/tcp/40334/p2p/12D3KooWEaX75kVqd6PyYTgqzga5NFvvDuRVC8JnkDwHoAHhavLn \
+-- \
+--execution wasm \
+--chain paseo.json \
+--port 30343 \
+--rpc-port 9977 \
+--rpc-methods unsafe \
+--unsafe-rpc-external \
+--blocks-pruning=256

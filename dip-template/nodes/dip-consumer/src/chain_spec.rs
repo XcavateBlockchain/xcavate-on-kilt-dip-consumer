@@ -21,7 +21,7 @@ use dip_consumer_runtime_template::{
 	AccountId, AuraId, BalancesConfig, CollatorSelectionConfig, ParachainInfoConfig, RuntimeGenesisConfig,
 	opaque::SessionKeys,
 	SessionConfig, Signature, SudoConfig, SystemConfig, EXISTENTIAL_DEPOSIT, SS58_PREFIX, WASM_BINARY,
-	StakingConfig, AssetsConfig,
+	StakingConfig, AssetsConfig, BabeConfig,
 };
 use sc_chain_spec::{ChainSpecExtension, ChainSpecGroup, Properties};
 use sc_service::{ChainType, GenericChainSpec};
@@ -33,7 +33,7 @@ use pallet_grandpa::AuthorityId as GrandpaId;
 use pallet_im_online::sr25519::AuthorityId as ImOnlineId;
 use sp_authority_discovery::AuthorityId as AuthorityDiscoveryId;
 
-const PARA_ID: u32 = 2_001;
+const PARA_ID: u32 = 4003;
 
 pub type ChainSpec = GenericChainSpec<RuntimeGenesisConfig, Extensions>;
 type AccountPublic = <Signature as Verify>::Signer;
@@ -178,7 +178,11 @@ fn testnet_genesis(
 			accounts: endowed_accounts.iter().cloned().map(|x| (1, x.clone(), 1_000_000)).collect::<Vec<_>>(),
 		},
 		authority_discovery: Default::default(),
-		babe: Default::default(),
+		// babe: Default::default(),
+		babe: BabeConfig {
+			epoch_config: Some(dip_consumer_runtime_template::BABE_GENESIS_EPOCH_CONFIG),
+			..Default::default()
+		},
 		council: Default::default(),
 		democracy: Default::default(),
 		grandpa: Default::default(),
@@ -192,7 +196,7 @@ fn testnet_genesis(
 
 pub fn development_config() -> ChainSpec {
 	let mut properties = Properties::new();
-	properties.insert("tokenSymbol".into(), "REILT".into());
+	properties.insert("tokenSymbol".into(), "XCAV".into());
 	properties.insert("tokenDecimals".into(), 12.into());
 	properties.insert("ss58Format".into(), SS58_PREFIX.into());
 
@@ -203,7 +207,8 @@ pub fn development_config() -> ChainSpec {
 		move || {
 			testnet_genesis(
 				vec![
-					authority_keys_from_seed("Alice")
+					authority_keys_from_seed("Alice"),
+					authority_keys_from_seed("Bob")
 					//(
 					// get_account_id_from_seed::<sr25519::Public>("Alice"),
 					// get_collator_keys_from_seed("Alice"),
@@ -228,7 +233,7 @@ pub fn development_config() -> ChainSpec {
 		None,
 		None,
 		Extensions {
-			relay_chain: "rococo-local".into(),
+			relay_chain: "paseo".into(),
 			para_id: PARA_ID,
 		},
 	)

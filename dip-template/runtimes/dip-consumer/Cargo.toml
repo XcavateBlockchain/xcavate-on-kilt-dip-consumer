@@ -45,6 +45,7 @@ pallet-utility                             = { workspace = true }
 sp-api                                     = { workspace = true }
 sp-block-builder                           = { workspace = true }
 sp-consensus-aura                          = { workspace = true }
+sp-consensus-babe                          = { workspace = true }
 sp-core                                    = { workspace = true }
 sp-inherents                               = { workspace = true }
 sp-offchain                                = { workspace = true }
@@ -151,6 +152,7 @@ std = [
   "sp-api/std",
   "sp-block-builder/std",
   "sp-consensus-aura/std",
+  "sp-consensus-babe/std",
   "sp-core/std",
   "sp-inherents/std",
   "sp-offchain/std",

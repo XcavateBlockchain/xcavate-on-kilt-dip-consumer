@@ -1,0 +1,53 @@
+for node02
+ganesholi@Ganeshs-MacBook-Air polkadot-runtime-template % ./target/release/dip-consumer-node-template key generate --scheme Sr25519 --password-interactive
+
+// command for ganesh
+ganesholi@Ganeshs-MacBook-Air xcavate-on-kilt-dip-consumer % ../binaries/dip-consumer-node-template key generate --scheme Sr25519 --password-interactive
+Key password: 
+Secret phrase:       analyst arena bacon salad express meat neglect color nerve day slush name
+  Network ID:        substrate
+  Secret seed:       0xf916b6989dd54a281a0286057d3af395edd054307cf9a3a567cb378295788716
+  Public key (hex):  0xa4943104d48d6997cfd901d2f2e1aba96b75b0bb29aeed61380cb600e37e021a
+  Account ID:        0xa4943104d48d6997cfd901d2f2e1aba96b75b0bb29aeed61380cb600e37e021a
+  Public key (SS58): 5FnVjRmSBvzVnrPKkyFvqers5da1HWog6Xv3AxZdnEpob1b2
+  SS58 Address:      5FnVjRmSBvzVnrPKkyFvqers5da1HWog6Xv3AxZdnEpob1b2
+ganesholi@Ganeshs-MacBook-Air xcavate-on-kilt-dip-consumer % 
+
+
+./target/release/dip-consumer-node-template key insert --base-path ./tmp/node02 \
+  --chain raw-parachain-chainspec.json \
+  --scheme Sr25519 \
+  --suri "analyst arena bacon salad express meat neglect color nerve day slush name" \
+  --password-interactive \
+  --key-type aura
+
+// For ganesh
+ganesholi@Ganeshs-MacBook-Air xcavate-on-kilt-dip-consumer % ../binaries/dip-consumer-node-template key insert --base-path ./tmp/node02 \
+  --chain raw-parachain-chainspec.json \
+  --scheme Sr25519 \
+  --suri "analyst arena bacon salad express meat neglect color nerve day slush name" \
+  --password-interactive \
+  --key-type aura
+Keystore password: 
+
+
+
+
+// aura key for node01
+ganesholi@Ganeshs-MacBook-Air xcavate-on-kilt-dip-consumer % ../binaries/dip-consumer-node-template key generate --scheme Sr25519 --password-interactive
+Key password: 
+Secret phrase:       profit defense draft detect arrange pledge novel tongue spawn pause rare happy
+  Network ID:        substrate
+  Secret seed:       0x5323aa9d7e6a674212a7b3706ce82debb921c90e4b9c947d7bb7df383add9e69
+  Public key (hex):  0x7c5f568344733e70bfd514745d9779c374af50a29a59c0ed0ff791864e2b1e3d
+  Account ID:        0x7c5f568344733e70bfd514745d9779c374af50a29a59c0ed0ff791864e2b1e3d
+  Public key (SS58): 5Esn7gyUjot3gRUBrQmjvsipKUBesJHTyj43nkRJT3ekF9vT
+  SS58 Address:      5Esn7gyUjot3gRUBrQmjvsipKUBesJHTyj43nkRJT3ekF9vT
+ganesholi@Ganeshs-MacBook-Air xcavate-on-kilt-dip-consumer % 
+
+ganesholi@Ganeshs-MacBook-Air xcavate-on-kilt-dip-consumer % ../binaries/dip-consumer-node-template key insert --base-path ./tmp/node01 \
+  --chain raw-parachain-chainspec.json \
+  --scheme Sr25519 \
+  --suri "profit defense draft detect arrange pledge novel tongue spawn pause rare happy" \
+  --password-interactive \
+  --key-type aura
