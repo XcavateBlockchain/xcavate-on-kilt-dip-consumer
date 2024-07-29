@@ -43,6 +43,7 @@ pub mod constants;
 pub mod impls;
 mod voter_bags;
 
+use pallet_dip_consumer::EnsureDipOrigin;
 use parity_scale_codec as codec;
 use sp_runtime::codec::Decode;
 use constants::{currency::*, time::*};
@@ -54,7 +55,7 @@ use frame_support::{
 	pallet_prelude::{DispatchClass, Get},
 	traits::{
 //		fungible::HoldConsideration,
-		tokens::{PayFromAccount, 
+		tokens::{PayFromAccount,
 //			UnityAssetBalanceConversion
 		},
 		AsEnsureOriginWithArg, EitherOfDiverse, EqualPrivilegeOnly,
@@ -102,7 +103,7 @@ pub use frame_support::{
 pub use frame_system::Call as SystemCall;
 pub use pallet_balances::Call as BalancesCall;
 use pallet_election_provider_multi_phase::{
-//	GeometricDepositBase, 
+//	GeometricDepositBase,
 	SolutionAccuracyOf};
 /// Import the nft pallet
 use pallet_nfts::PalletFeatures;
@@ -300,7 +301,7 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
 	state_version: 1,
 };
 
-pub const BABE_GENESIS_EPOCH_CONFIG: sp_consensus_babe::BabeEpochConfiguration = 
+pub const BABE_GENESIS_EPOCH_CONFIG: sp_consensus_babe::BabeEpochConfiguration =
 	sp_consensus_babe::BabeEpochConfiguration {
 		c: PRIMARY_PROBABILITY,
 		allowed_slots: sp_consensus_babe::AllowedSlots::PrimaryAndSecondaryPlainSlots,
@@ -701,6 +702,30 @@ parameter_types! {
 }
 
 /// Configure the pallet-nft-marketplace in pallets/nft-marketplace.
+struct DipOriginToDidAdapter;
+
+impl EnsureOrigin<RuntimeCall> for DipOriginToDidAdapter {
+	type Success = dip_provider_runtime_template::DidIdentifier;
+
+	fn try_origin(o: RuntimeCall) -> Result<Self::Success, RuntimeCall> {
+		let dip_origin = EnsureDipOrigin::<
+			dip_provider_runtime_template::DidIdentifier,
+			dip_provider_runtime_template::AccountId,
+			(),
+		>::try_origin(o)?;
+		Ok(dip_origin.identifier)
+	}
+
+	#[cfg(feature = "runtime-benchmarks")]
+	fn try_successful_origin() -> Result<RuntimeCall, ()> {
+		let successful_origin = EnsureDipOrigin::<
+			dip_provider_runtime_template::DidIdentifier,
+			dip_provider_runtime_template::AccountId,
+			(),
+		>::try_successful_origin()
+	}
+}
+
 impl pallet_nft_marketplace::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
 	type WeightInfo = pallet_nft_marketplace::weights::SubstrateWeight<Runtime>;
@@ -714,11 +739,13 @@ impl pallet_nft_marketplace::Config for Runtime {
 	type ItemId = u32;
 	type TreasuryId = TreasuryPalletId;
 	type CommunityProjectsId = CommunityProjectPalletId;
- 	type FractionalizeCollectionId = <Self as pallet_nfts::Config>::CollectionId;
+	type FractionalizeCollectionId = <Self as pallet_nfts::Config>::CollectionId;
 	type FractionalizeItemId = <Self as pallet_nfts::Config>::ItemId;
 	type AssetId = <Self as pallet_assets::Config<Instance1>>::AssetId;
-	type AssetId2 = u32; 
+	type AssetId2 = u32;
 	type PostcodeLimit = Postcode;
+	type DidIdentifier = dip_provider_runtime_template::DidIdentifier;
+	type BuyTokenOrigin = DipOriginToDidAdapter;
 }
 
 parameter_types! {
@@ -807,7 +834,7 @@ impl pallet_property_governance::Config for Runtime {
 	type MinSlashingAmount = MinimumSlashingAmount;
 	type MaxVoter = MaximumVoter;
 	type Threshold = VotingThreshold;
-} 
+}
 
 parameter_types! {
 	pub Features: PalletFeatures = PalletFeatures::all_enabled();
