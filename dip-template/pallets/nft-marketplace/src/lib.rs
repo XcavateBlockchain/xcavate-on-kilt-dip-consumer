@@ -28,7 +28,7 @@ use enumflags2::BitFlags;
 use pallet_nfts::{CollectionConfig, CollectionSetting, CollectionSettings, ItemConfig, ItemSettings, MintSettings};
 
 use frame_system::RawOrigin;
-
+// use dip_consumer_runtime_template::::RuntimeCall;
 type AccountIdOf<T> = <T as frame_system::Config>::AccountId;
 
 type BalanceOf<T> = <T as pallet_assets::Config<pallet_assets::Instance1>>::Balance;
@@ -658,11 +658,11 @@ pub mod pallet {
 		pub fn buy_token(origin: OriginFor<T>, listing_id: u32, amount: u32) -> DispatchResult {
 			let origin = ensure_signed(origin.clone())?;
 			// You have access to the DID origin now.
-			// let did_origin = T::BuyTokenOrigin::ensure_origin(origin)?;
-			ensure!(
-				pallet_xcavate_whitelist::Pallet::<T>::whitelisted_accounts(origin.clone()),
-				Error::<T>::UserNotWhitelisted
-			);
+			// let origin = T::BuyTokenOrigin::ensure_origin(origin.clone())?;
+			// ensure!(
+			// 	pallet_xcavate_whitelist::Pallet::<T>::whitelisted_accounts(origin.clone()),
+			// 	Error::<T>::UserNotWhitelisted
+			// );
 			let mut listed_token = ListedToken::<T>::take(listing_id).ok_or(Error::<T>::TokenNotForSale)?;
 			ensure!(listed_token >= amount, Error::<T>::NotEnoughTokenAvailable);
 			let mut nft_details = Self::ongoing_object_listing(listing_id).ok_or(Error::<T>::InvalidIndex)?;

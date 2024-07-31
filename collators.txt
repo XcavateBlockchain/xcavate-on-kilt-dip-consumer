@@ -77,3 +77,13 @@
 --rpc-methods unsafe \
 --unsafe-rpc-external \
 --blocks-pruning=256
+
+../binaries/dip-consumer-node-template \
+--chain paseo.json \
+--name myrpc \
+--state-pruning 1000 \
+--blocks-pruning archive \
+--rpc-max-connections 100 \
+--rpc-cors all \
+--rpc-methods Safe \
+--rpc-port 9944

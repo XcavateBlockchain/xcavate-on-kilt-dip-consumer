@@ -34,41 +34,35 @@
 include!(concat!(env!("OUT_DIR"), "/wasm_binary.rs"));
 
 mod dip;
-mod origin_adapter;
 mod weights;
 pub use crate::{dip::*, origin_adapter::*};
 
 /// Constant values used within the runtimezz
 pub mod constants;
 pub mod impls;
+pub mod origin_adapter;
 mod voter_bags;
 
-use pallet_dip_consumer::EnsureDipOrigin;
 use crate::opaque::SessionKeys;
 use constants::{currency::*, time::*};
 use frame_election_provider_support::{onchain, ExtendedBalance, SequentialPhragmen, VoteWeight};
-use frame_support::genesis_builder_helper::{build_config, create_default_config};
 use frame_support::{
 	instances::{Instance1, Instance2},
 	ord_parameter_types,
-	pallet_prelude::{DispatchClass, EnsureOrigin, Get},
+	pallet_prelude::{DispatchClass, Get},
 	traits::{
-		//		fungible::HoldConsideration,
-		tokens::{
-			PayFromAccount,
-			//			UnityAssetBalanceConversion
-		},
 		AsEnsureOriginWithArg,
 		EitherOfDiverse,
-		EqualPrivilegeOnly,
 		// LinearStoragePrice,
+		EnsureOrigin,
+		EqualPrivilegeOnly,
 	},
 	PalletId,
 };
 use frame_system::{EnsureSigned, EnsureSignedBy, EnsureWithSuccess};
 use impls::CreditToBlockAuthor;
 use node_primitives::Moment;
-use pallet_grandpa::AuthorityId as GrandpaId;
+use pallet_dip_consumer::EnsureDipOrigin;
 use pallet_im_online::sr25519::AuthorityId as ImOnlineId;
 use pallet_session::historical as pallet_session_historical;
 use parity_scale_codec as codec;
@@ -79,8 +73,8 @@ use sp_runtime::{
 	curve::PiecewiseLinear,
 	generic, impl_opaque_keys,
 	traits::{
-		AccountIdConversion, AccountIdLookup, BlakeTwo256, Block as BlockT, Convert, ConvertInto, IdentifyAccount,
-		NumberFor, One, OpaqueKeys, Verify,
+		AccountIdConversion, AccountIdLookup, BlakeTwo256, Block as BlockT, Convert, ConvertInto, IdentifyAccount, One,
+		OpaqueKeys, Verify,
 	},
 	transaction_validity::{TransactionPriority, TransactionSource, TransactionValidity},
 	ApplyExtrinsicResult, FixedU128, MultiSignature, Percent,
@@ -90,7 +84,7 @@ use sp_staking::currency_to_vote::U128CurrencyToVote;
 // A few exports that help ease life for downstream crates.
 use frame_election_provider_support::bounds::{ElectionBounds, ElectionBoundsBuilder};
 pub use frame_support::{
-	construct_runtime, derive_impl, parameter_types,
+	construct_runtime, parameter_types,
 	traits::{ConstU128, ConstU32, ConstU64, ConstU8, KeyOwnerProofSystem, Randomness, StorageInfo},
 	weights::{
 		constants::{BlockExecutionWeight, ExtrinsicBaseWeight, RocksDbWeight, WEIGHT_REF_TIME_PER_SECOND},
@@ -111,7 +105,6 @@ use pallet_nfts::PalletFeatures;
 pub use pallet_staking::StakerStatus;
 pub use pallet_timestamp::Call as TimestampCall;
 use pallet_transaction_payment::{ConstFeeMultiplier, CurrencyAdapter, Multiplier};
-use sp_runtime::traits::IdentityLookup;
 
 use dip_provider_runtime_template::Web3Name;
 pub use sp_consensus_aura::sr25519::AuthorityId as AuraId;
@@ -126,13 +119,12 @@ use frame_system::{
 };
 use pallet_balances::AccountData;
 use pallet_collator_selection::IdentityCollator;
-use pallet_session::{FindAccountFromAuthorIndex, PeriodicSessions};
 use pallet_transaction_payment::{FeeDetails, RuntimeDispatchInfo};
 use sp_api::impl_runtime_apis;
 use sp_consensus_aura::SlotDuration;
 use sp_core::{crypto::KeyTypeId, ConstBool, ConstU16, OpaqueMetadata};
 use sp_inherents::{CheckInherentsResult, InherentData};
-use sp_runtime::{AccountId32, OpaqueExtrinsic};
+use sp_runtime::OpaqueExtrinsic;
 use sp_std::prelude::*;
 use sp_version::RuntimeVersion;
 
@@ -639,6 +631,13 @@ impl pallet_sudo::Config for Runtime {
 	type WeightInfo = pallet_sudo::weights::SubstrateWeight<Runtime>; // FIXME
 }
 
+parameter_types! {
+	pub const NftMarketplacePalletId: PalletId = PalletId(*b"py/nftxc");
+	pub const CommunityProjectPalletId: PalletId = PalletId(*b"py/nftxa");
+	pub const MaxNftTokens: u32 = 100;
+	pub const Postcode: u32 = 10;
+}
+
 /// Configure the pallet-nft-marketplace in pallets/nft-marketplace.
 struct DipOriginToDidAdapter;
 
@@ -662,13 +661,6 @@ impl EnsureOrigin<RuntimeCall> for DipOriginToDidAdapter {
 			(),
 		>::try_successful_origin();
 	}
-}
-
-parameter_types! {
-	pub const NftMarketplacePalletId: PalletId = PalletId(*b"py/nftxc");
-	pub const CommunityProjectPalletId: PalletId = PalletId(*b"py/nftxa");
-	pub const MaxNftTokens: u32 = 100;
-	pub const Postcode: u32 = 10;
 }
 
 /// Configure the pallet-nft-marketplace in pallets/nft-marketplace.
