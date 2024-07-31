@@ -33,6 +33,7 @@ frame-support 		= { workspace = true }
 frame-system		= { workspace = true }
 sp-runtime  = { workspace = true }
 sp-std 				= { workspace = true }
+sp-io 		= { workspace = true }
 
 # pallet-nfts = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-v1.6.0" }
 # pallet-balances = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-v1.6.0" }
@@ -50,7 +51,6 @@ pallet-xcavate-whitelist = { path = "../xcavate-whitelist", default-features = f
 
 [dev-dependencies]
 sp-core 	= { workspace = true }
-sp-io 		= { workspace = true }
 
 # sp-core = {  git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-v1.6.0" }
 # sp-io = {  git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-v1.6.0" }
