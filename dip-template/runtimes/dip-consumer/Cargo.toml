@@ -88,14 +88,10 @@ pallet-authority-discovery = { workspace = true }
 pallet-staking-reward-curve = { workspace = true }
 
 # Xcavate local
-pallet-xcavate-whitelist = { workspace = true }
-pallet-community-loan-pool = { workspace = true }
-pallet-xcavate-staking = { workspace = true }
 pallet-nft-marketplace = { workspace = true }
-pallet-community-projects = { workspace = true }
 pallet-property-management = { workspace = true }
 pallet-property-governance = { workspace = true }
-pallet-dummy                 = { workspace = true }
+pallet-xcavate-whitelist = { workspace = true }
 
 # Cumulus
 cumulus-pallet-aura-ext         = { workspace = true }
@@ -192,11 +188,8 @@ std = [
   "pallet-insecure-randomness-collective-flip/std",
   "pallet-authority-discovery/std",
 
-  "pallet-dummy/std",
   "pallet-xcavate-whitelist/std",
-  "pallet-xcavate-staking/std",
   "pallet-nft-marketplace/std",
-  "pallet-community-projects/std",
   "pallet-property-management/std",
   "pallet-property-governance/std",
 ]

@@ -194,13 +194,9 @@ pallet-staking                             = { git = "https://github.com/parityt
 pallet-staking-reward-curve                = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, branch = "release-crates-io-v1.1.0" }
 pallet-uniques                             = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, branch = "release-crates-io-v1.1.0" }
 # Xcavate own pallets
-pallet-community-loan-pool = { path = "dip-template/pallets/community-loan-pool", default-features = false }
-pallet-community-projects  = { path = "dip-template/pallets/community-projects", default-features = false }
-pallet-dummy               = { path = "dip-template/pallets/dummy", default-features = false }
 pallet-nft-marketplace     = { path = "dip-template/pallets/nft-marketplace", default-features = false }
 pallet-property-governance = { path = "dip-template/pallets/property-governance", default-features = false }
 pallet-property-management = { path = "dip-template/pallets/property-management", default-features = false }
-pallet-xcavate-staking     = { path = "dip-template/pallets/xcavate-staking", default-features = false }
 pallet-xcavate-whitelist   = { path = "dip-template/pallets/xcavate-whitelist", default-features = false }
 
 # Polkadot (with default disabled)

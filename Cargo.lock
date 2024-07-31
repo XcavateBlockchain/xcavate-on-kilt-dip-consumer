@@ -2396,11 +2396,8 @@ dependencies = [
  "pallet-child-bounties",
  "pallet-collator-selection",
  "pallet-collective",
- "pallet-community-loan-pool",
- "pallet-community-projects",
  "pallet-democracy",
  "pallet-dip-consumer",
- "pallet-dummy",
  "pallet-election-provider-multi-phase",
  "pallet-grandpa",
  "pallet-im-online",
@@ -2428,7 +2425,6 @@ dependencies = [
  "pallet-treasury",
  "pallet-uniques",
  "pallet-utility",
- "pallet-xcavate-staking",
  "pallet-xcavate-whitelist",
  "parity-scale-codec",
  "polkadot-primitives",
@@ -6200,51 +6196,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "pallet-community-loan-pool"
-version = "1.14.0-dev"
-dependencies = [
- "enumflags2",
- "frame-benchmarking",
- "frame-support",
- "frame-system",
- "pallet-balances",
- "pallet-insecure-randomness-collective-flip",
- "pallet-nfts",
- "pallet-timestamp",
- "pallet-transaction-payment",
- "pallet-xcavate-whitelist",
- "parity-scale-codec",
- "scale-info",
- "serde",
- "sp-core",
- "sp-io",
- "sp-runtime",
- "sp-std",
-]
-
-[[package]]
-name = "pallet-community-projects"
-version = "1.14.0-dev"
-dependencies = [
- "enumflags2",
- "frame-benchmarking",
- "frame-support",
- "frame-system",
- "pallet-assets",
- "pallet-balances",
- "pallet-nfts",
- "pallet-timestamp",
- "pallet-xcavate-whitelist",
- "parity-scale-codec",
- "scale-info",
- "serde",
- "sp-core",
- "sp-io",
- "sp-runtime",
- "sp-std",
-]
-
-[[package]]
 name = "pallet-democracy"
 version = "23.0.0"
 source = "git+https://github.com/paritytech/polkadot-sdk?branch=release-crates-io-v1.1.0#72dd732e5aebfa97dbb774cd3345d9ed6ee8aaf0"
@@ -6342,18 +6293,6 @@ dependencies = [
  "scale-info",
  "sp-io",
  "sp-keystore",
- "sp-runtime",
- "sp-std",
-]
-
-[[package]]
-name = "pallet-dummy"
-version = "1.14.0-dev"
-dependencies = [
- "frame-support",
- "frame-system",
- "parity-scale-codec",
- "scale-info",
  "sp-runtime",
  "sp-std",
 ]
@@ -7175,29 +7114,6 @@ dependencies = [
  "sp-core",
  "sp-io",
  "sp-keystore",
- "sp-runtime",
- "sp-std",
-]
-
-[[package]]
-name = "pallet-xcavate-staking"
-version = "1.14.0-dev"
-dependencies = [
- "frame-benchmarking",
- "frame-support",
- "frame-system",
- "pallet-balances",
- "pallet-community-loan-pool",
- "pallet-insecure-randomness-collective-flip",
- "pallet-nfts",
- "pallet-timestamp",
- "pallet-transaction-payment",
- "pallet-xcavate-whitelist",
- "parity-scale-codec",
- "scale-info",
- "serde",
- "sp-core",
- "sp-io",
  "sp-runtime",
  "sp-std",
 ]
