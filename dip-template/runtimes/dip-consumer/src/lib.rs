@@ -65,7 +65,6 @@ use node_primitives::Moment;
 use pallet_dip_consumer::EnsureDipOrigin;
 use pallet_im_online::sr25519::AuthorityId as ImOnlineId;
 use pallet_session::historical as pallet_session_historical;
-use parity_scale_codec as codec;
 use polkadot_primitives::Nonce;
 use sp_runtime::codec::Decode;
 use sp_runtime::{

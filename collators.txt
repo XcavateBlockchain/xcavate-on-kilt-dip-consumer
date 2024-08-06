@@ -68,7 +68,7 @@
 --base-path ./tmp/node01 \
 --port 40333 \
 --rpc-port 8844 \
---bootnodes /ip4/127.0.0.1/tcp/40334/p2p/12D3KooWEaX75kVqd6PyYTgqzga5NFvvDuRVC8JnkDwHoAHhavLn \
+--bootnodes /ip4/127.0.0.1/tcp/40334/p2p/12D3KooWGruV7y1PCrkUN5dEAKrYhk21NqqxwRfwrTRXo1nMv7cC \
 -- \
 --execution wasm \
 --chain paseo.json \
@@ -77,6 +77,21 @@
 --rpc-methods unsafe \
 --unsafe-rpc-external \
 --blocks-pruning=256
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ../binaries/dip-consumer-node-template \
 --chain paseo.json \

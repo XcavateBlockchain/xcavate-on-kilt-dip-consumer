@@ -1,80 +1,65 @@
 [package]
-name = "pallet-property-governance"
-version = { workspace = true }
+authors     = ["Xcavate Network"]
 description = "The Xcavate pallet property governance"
-authors = ["Xcavate Network"]
-homepage = "https://xcavate.io"
-edition = "2021"
-license = "Apache-2.0"
-publish = false
-repository = "https://github.com/XcavateBlockchain/MarketplaceMVP_Substrate/"
+edition     = "2021"
+homepage    = "https://xcavate.io"
+license     = "Apache-2.0"
+name        = "pallet-property-governance"
+publish     = false
+repository  = "https://github.com/XcavateBlockchain/MarketplaceMVP_Substrate/"
+version     = { workspace = true }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-# codec = { package = "parity-scale-codec", version = "3.6.1", default-features = false, features = [
-# 	"derive",
-# ] }
-# scale-info = { version = "2.10.0", default-features = false, features = ["derive"] }
-# serde = { version = "1.0.197", features = ["derive"], optional = true }
-# frame-benchmarking = {  default-features = false, optional = true, git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-v1.6.0" }
-# frame-support = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-v1.6.0" }
-# frame-system = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-v1.6.0" }
-parity-scale-codec = { workspace = true, features = ["derive"] }
-scale-info         = { workspace = true, features = ["derive"] }
+parity-scale-codec = { workspace = true }
+scale-info         = { workspace = true }
 
-serde			= { workspace = true,default-features = false, optional = true }	
-frame-benchmarking = { workspace = true, default-features = false, optional = true }	
+serde = { workspace = true}
 
-frame-support 		= { workspace = true }
-frame-system		= { workspace = true }
-sp-runtime  = { workspace = true }
-sp-core 	= { workspace = true }
-sp-io 		= { workspace = true }
+frame-benchmarking = { workspace = true }
+frame-support      = { workspace = true }
+frame-system       = { workspace = true }
+sp-std             = { workspace = true }
 
-
-# pallet-nfts = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-v1.6.0" }
-# pallet-balances = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-v1.6.0" }
-# pallet-assets = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-v1.6.0" }
-# pallet-nft-fractionalization = {  default-features = false, git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-v1.6.0" }
-pallet-nfts 		= { workspace = true, default-features = false }
-pallet-balances 	= { workspace = true, default-features = false }
-pallet-assets 	= { workspace = true, default-features = false }
-pallet-nft-fractionalization 	= { workspace = true, default-features = false }
+pallet-assets                = { workspace = true }
+pallet-balances              = { workspace = true }
+pallet-nft-fractionalization = { workspace = true }
+pallet-nfts                  = { workspace = true }
 
 # Local dependencies
-pallet-xcavate-whitelist = { path = "../xcavate-whitelist", default-features = false }
-pallet-nft-marketplace = { path = "../nft-marketplace", default-features = false }
+pallet-nft-marketplace     = { path = "../nft-marketplace", default-features = false }
 pallet-property-management = { path = "../property-management", default-features = false }
+pallet-xcavate-whitelist   = { path = "../xcavate-whitelist", default-features = false }
+sp-io      = { workspace = true }
 
 [dev-dependencies]
-# sp-core = {  git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-v1.6.0" }
-# sp-io = {  git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-v1.6.0" }
-# sp-runtime = {  git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-v1.6.0" }
+sp-core    = { workspace = true }
+sp-runtime = { workspace = true }
 
 [features]
 default = ["std"]
+runtime-benchmarks = ["frame-benchmarking/runtime-benchmarks"]
 std = [
-#	"codec/std",
+	"frame-benchmarking/std",
 	"parity-scale-codec/std",
-	"frame-benchmarking?/std",
 
 	"frame-support/std",
 	"frame-system/std",
-	"sp-runtime/std",
 	"sp-core/std",
-  	"sp-io/std",
+	"sp-io/std",
+	"sp-runtime/std",
+	"sp-std/std",
 
-	"scale-info/std",
-	"serde",
-	"pallet-nfts/std",
-	"pallet-xcavate-whitelist/std",
-	"pallet-balances/std",
-	"pallet-nft-marketplace/std",
 	"pallet-assets/std",
+	"pallet-balances/std",
 	"pallet-nft-fractionalization/std",
+	"pallet-nft-marketplace/std",
+	"pallet-nfts/std",
 	"pallet-property-management/std",
+	"pallet-xcavate-whitelist/std",
+	"scale-info/std",
+	"serde/std",
 ]
-runtime-benchmarks = ["frame-benchmarking/runtime-benchmarks"]
 try-runtime = ["frame-support/try-runtime"]
