@@ -16,7 +16,7 @@ targets = ["x86_64-unknown-linux-gnu"]
 parity-scale-codec = { workspace = true }
 scale-info         = { workspace = true }
 
-frame-benchmarking = { workspace = true }
+frame-benchmarking = { workspace = true, optional = true}
 frame-support      = { workspace = true }
 frame-system       = { workspace = true }
 sp-std             = { workspace = true }
@@ -34,7 +34,7 @@ runtime-benchmarks = [
 
 default = ["std"]
 std = [
-	"frame-benchmarking/std",
+	"frame-benchmarking?/std",
 	"parity-scale-codec/std",
 
 	"frame-support/std",

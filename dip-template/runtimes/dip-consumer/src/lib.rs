@@ -237,7 +237,6 @@ construct_runtime!(
 		// Xcavate dependeny pallets
 		Nfts: pallet_nfts,
 		Uniques: pallet_uniques, //10
-		RandomnessCollectiveFlip: pallet_insecure_randomness_collective_flip,
 		Assets: pallet_assets::<Instance1>,
 		PoolAssets: pallet_assets::<Instance2>,
 		Multisig: pallet_multisig,
@@ -361,8 +360,6 @@ impl frame_system::Config for Runtime {
 	type SystemWeightInfo = weights::frame_system::WeightInfo<Runtime>;
 	type Version = Version;
 }
-
-impl pallet_insecure_randomness_collective_flip::Config for Runtime {}
 
 /// Maximum number of blocks simultaneously accepted by the Runtime, not yet included into the
 /// relay chain.
